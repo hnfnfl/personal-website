@@ -42,7 +42,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
             >
-              <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300">
+              <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-500/20 glow-card">
                 <CardHeader>
                   <CardTitle className="text-xl text-cyan-400">{project.title}</CardTitle>
                   <CardDescription className="text-gray-600 dark:text-gray-300">
@@ -52,7 +52,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <CardContent>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tech.map((tech) => (
-                      <Badge key={tech} variant="outline" className="border-cyan-500/30 text-cyan-300">
+                      <Badge key={tech} variant="outline" className="border-cyan-500/30 text-cyan-300 glow-badge">
                         {tech}
                       </Badge>
                     ))}
