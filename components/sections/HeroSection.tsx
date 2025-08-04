@@ -1,52 +1,94 @@
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { Server, Cloud, Smartphone, Github, Linkedin } from "lucide-react"
-import React from "react"
+import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const roles = [
+  'Software Engineer',
+  'Backend Developer', 
+  'Cloud Engineer',
+  'Mobile Developer'
+];
 
 export function HeroSection() {
+  const [roleIndex, setRoleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="home" className="pt-20 min-h-screen flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                Software Engineer
-              </span>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">
+              Hi, I'm
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
-              Crafting scalable backend systems, cloud infrastructure, and mobile applications with precision and innovation.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <Badge variant="secondary" className="text-lg py-2 px-4 bg-cyan-500/10 text-cyan-400 border-cyan-500/20">
-                <Server className="w-4 h-4 mr-2" />
-                Backend Development
-              </Badge>
-              <Badge variant="secondary" className="text-lg py-2 px-4 bg-blue-500/10 text-blue-400 border-blue-500/20">
-                <Cloud className="w-4 h-4 mr-2" />
-                Cloud Engineering
-              </Badge>
-              <Badge variant="secondary" className="text-lg py-2 px-4 bg-purple-500/10 text-purple-400 border-purple-500/20">
-                <Smartphone className="w-4 h-4 mr-2" />
-                Mobile Development
-              </Badge>
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              John Developer
+            </h1>
+            <div className="text-2xl md:text-3xl font-semibold mb-6 text-white flex justify-center items-baseline">
+              I'm a
+              <span className="ml-2 relative inline-block">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={roles[roleIndex]}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-bold"
+                  >
+                    {roles[roleIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-center space-x-6"
-          >
-            <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
-              <Github className="w-5 h-5 mr-2" />
-              GitHub
-            </Button>
-            <Button size="lg" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
-              <Linkedin className="w-5 h-5 mr-2" />
-              LinkedIn
-            </Button>
+            <p className="text-md md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+              Passionate about building scalable backend systems, cloud infrastructure, and mobile applications. I turn complex problems into elegant solutions.
+            </p>
+            <div className="flex flex-col items-center gap-6">
+              <div className="flex items-center justify-center gap-4 mt-8">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-cyan-400 to-blue-400 text-black px-8 py-3 rounded-[1.5rem] font-semibold shadow-none hover:from-cyan-500 hover:to-blue-500 transition-all flex items-center"
+                  onClick={() => {
+                    const el = document.getElementById("about");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                >
+                  View My Work
+                  <ChevronDown className="w-5 h-5 ml-2" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="border-2 border-cyan-300 text-cyan-300 bg-transparent rounded-[1rem] hover:bg-cyan-400/10 transition-all w-12 h-12 flex items-center justify-center"
+                >
+                  <Github className="w-5 h-5" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="border-2 border-cyan-300 text-cyan-300 bg-transparent rounded-[1rem] hover:bg-cyan-400/10 transition-all w-12 h-12 flex items-center justify-center"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </Button>
+                <Button
+                  size="icon"
+                  variant="outline"
+                  className="border-2 border-cyan-300 text-cyan-300 bg-transparent rounded-[1rem] hover:bg-cyan-400/10 transition-all w-12 h-12 flex items-center justify-center"
+                >
+                  <Mail className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
