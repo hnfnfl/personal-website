@@ -1,9 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { motion } from "framer-motion"
 import { ExternalLink, Github } from "lucide-react"
-import React from "react"
 
 interface Project {
   title: string
@@ -59,10 +58,12 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     ))}
                   </div>
                   <div className="flex space-x-4">
-                    <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Live Demo
-                    </Button>
+                    {project.link && project.link !== "#" && (
+                      <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Live Demo
+                      </Button>
+                    )}
                     <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
                       <Github className="w-4 h-4 mr-2" />
                       Code
