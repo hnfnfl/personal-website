@@ -28,7 +28,7 @@ export function HeroSection() {
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">
               Hi, I'm
             </h1>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text-cyan-blue">
               John Developer
             </h1>
             <div className="text-2xl md:text-3xl font-semibold mb-6 text-white flex justify-center items-baseline">
@@ -41,7 +41,7 @@ export function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -30 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-bold"
+                    className="gradient-text-cyan-blue font-bold"
                   >
                     {roles[roleIndex]}
                   </motion.span>

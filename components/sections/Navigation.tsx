@@ -23,7 +23,7 @@ export function Navigation({ activeSection, isDark, setIsDark, isMenuOpen, setIs
         <div className="flex justify-between items-center py-4">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
+            className="text-2xl font-bold gradient-text-cyan-blue"
           >
             Portfolio
           </motion.div>

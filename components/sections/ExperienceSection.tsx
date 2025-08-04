@@ -25,7 +25,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text-cyan-blue">
             Experience
           </h2>
         </motion.div>
