@@ -1,19 +1,14 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { AnimatePresence, motion } from "framer-motion"
-import { Cloud, Code, ExternalLink, Github, Linkedin, Mail, Menu, Moon, Server, Smartphone, Sun, X } from "lucide-react"
-import { useEffect, useState } from "react"
-import { Navigation } from "@/components/sections/Navigation"
-import { HeroSection } from "@/components/sections/HeroSection"
 import { AboutSection } from "@/components/sections/AboutSection"
-import { SkillsSection } from "@/components/sections/SkillsSection"
-import { ProjectsSection } from "@/components/sections/ProjectsSection"
-import { ExperienceSection } from "@/components/sections/ExperienceSection"
 import { ContactSection } from "@/components/sections/ContactSection"
+import { ExperienceSection } from "@/components/sections/ExperienceSection"
 import { Footer } from "@/components/sections/Footer"
+import { HeroSection } from "@/components/sections/HeroSection"
+import { Navigation } from "@/components/sections/Navigation"
+import { ProjectsSection } from "@/components/sections/ProjectsSection"
+import { SkillsSection } from "@/components/sections/SkillsSection"
+import { useEffect, useState } from "react"
 
 export default function Portfolio() {
   const [isDark, setIsDark] = useState(true)
@@ -25,9 +20,9 @@ export default function Portfolio() {
   }, [isDark])
 
   const skills = {
-    backend: ["Node.js", "Python", "Java", "PostgreSQL", "MongoDB", "REST APIs", "GraphQL"],
-    cloud: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform", "Microservices"],
-    networking: ["TCP/IP", "Load Balancing", "VPN", "Firewall Configuration", "Network Security"],
+    backend: ["Node.js", "Golang", "MySQL", "PostgreSQL", "REST APIs", "Docker"],
+    cloud: ["AWS", "CI/CD", "Terraform", "Microservices", "DNS Management"],
+    networking: ["Load Balancing", "VPN", "High Availability", "Virtualization"],
     mobile: ["Android Native", "Kotlin", "Java", "Room Database", "Retrofit", "Material Design"],
   }
 
@@ -38,7 +33,7 @@ export default function Portfolio() {
         "Scalable backend system handling 10k+ concurrent users with Docker containerization and AWS deployment.",
       tech: ["Node.js", "PostgreSQL", "Docker", "AWS", "Redis"],
       category: "backend",
-      link: "#",
+      link: "",
       github: "#",
     },
     {
@@ -46,7 +41,7 @@ export default function Portfolio() {
       description: "Terraform-based infrastructure as code solution reducing deployment time by 80%.",
       tech: ["Terraform", "AWS", "Kubernetes", "Jenkins", "Monitoring"],
       category: "cloud",
-      link: "#",
+      link: "",
       github: "#",
     },
     {
@@ -62,7 +57,7 @@ export default function Portfolio() {
       description: "Native Android application with offline sync, push notifications, and material design.",
       tech: ["Kotlin", "Room", "Retrofit", "Material Design", "Firebase"],
       category: "mobile",
-      link: "#",
+      link: "",
       github: "#",
     },
   ]
