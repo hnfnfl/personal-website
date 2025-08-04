@@ -96,27 +96,27 @@ export default function Portfolio() {
 
   const experiences = [
     {
-      title: "Senior Software Engineer",
-      company: "Tech Solutions Inc.",
+      title: "Cloud Engineer",
+      company: "Samsung Research Indonesia",
       period: "2022 - Present",
       description:
         "Led backend development for cloud-native applications, mentored junior developers, and implemented DevOps practices.",
-      achievements: ["Reduced system latency by 40%", "Implemented CI/CD pipeline", "Led team of 5 developers"],
+      techStack: ["Golang", "PDNS", "AWS", "CI/CD", "Docker", "Docker Swarm", "Terraform", "HashiCorp Vault", "Jenkins"],
     },
     {
-      title: "Cloud Engineer",
-      company: "CloudTech Corp",
-      period: "2020 - 2022",
+      title: "Android Developer",
+      company: "JM Network",
+      period: "2021 - 2022",
       description:
         "Designed and maintained cloud infrastructure, automated deployment processes, and ensured system reliability.",
-      achievements: ["99.9% uptime achievement", "Cost optimization of 30%", "Automated 80% of deployments"],
+      techStack: ["Kotlin", "Room", "Retrofit", "Material Design", "Firebase", "PHP", "CodeIgniter", "MySQL"],
     },
     {
-      title: "Mobile Developer",
-      company: "Mobile Innovations",
-      period: "2018 - 2020",
-      description: "Developed Android applications with focus on performance optimization and user experience.",
-      achievements: ["Published 5 apps on Play Store", "4.5+ star ratings", "100k+ downloads"],
+      title: "Web Application Developer",
+      company: "Dinas Perindustrian dan Perdagangan Kabupaten Jombang (Disperindag Jombang)",
+      period: "2020 - 2020",
+      description: "Developed web applications with focus on performance optimization and user experience.",
+      techStack: ["PHP", "CodeIgniter", "MySQL", "HTML", "CSS", "JavaScript", "jQuery", "Bootstrap"],
     },
   ]
 

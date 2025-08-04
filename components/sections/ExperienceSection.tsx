@@ -7,7 +7,7 @@ interface Experience {
   company: string
   period: string
   description: string
-  achievements: string[]
+  techStack: string[]
 }
 
 interface ExperienceSectionProps {
@@ -55,12 +55,22 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 <CardContent>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">{exp.description}</p>
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-cyan-400">Key Achievements:</h4>
-                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
-                      {exp.achievements.map((achievement, i) => (
-                        <li key={i}>{achievement}</li>
-                      ))}
-                    </ul>
+                    <h4 className="font-semibold text-cyan-400">Tech Stack Used:</h4>
+                    {exp.techStack.length > 4 ? (
+                      <ul
+                        className={`grid grid-cols-1 md:${exp.techStack.length > 6 ? "grid-cols-3" : "grid-cols-2"} gap-x-6 list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300`}
+                      >
+                        {exp.techStack.map((tech, i) => (
+                          <li key={i}>{tech}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
+                        {exp.techStack.map((tech, i) => (
+                          <li key={i}>{tech}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </CardContent>
               </Card>
