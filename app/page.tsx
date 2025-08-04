@@ -60,6 +60,38 @@ export default function Portfolio() {
       link: "",
       github: "#",
     },
+    {
+      title: "Personal Portfolio Website",
+      description: "Modern portfolio built with Next.js, Tailwind CSS, and Framer Motion animations.",
+      tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
+      category: "frontend",
+      link: "#",
+      github: "#",
+    },
+    {
+      title: "Chat Application",
+      description: "Real-time chat app with WebSocket, authentication, and group messaging.",
+      tech: ["Node.js", "Socket.io", "React", "MongoDB"],
+      category: "fullstack",
+      link: "#",
+      github: "#",
+    },
+    {
+      title: "DevOps Monitoring Tool",
+      description: "Dashboard for monitoring CI/CD pipelines and cloud resources.",
+      tech: ["Golang", "Prometheus", "Grafana", "Docker"],
+      category: "devops",
+      link: "#",
+      github: "#",
+    },
+    {
+      title: "Recipe Sharing Platform",
+      description: "Social platform for sharing and discovering recipes, with user profiles and comments.",
+      tech: ["Django", "React", "PostgreSQL"],
+      category: "web",
+      link: "#",
+      github: "#",
+    },
   ]
 
   const experiences = [

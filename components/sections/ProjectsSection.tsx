@@ -1,8 +1,9 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { ExternalLink, Github } from "lucide-react"
+import { useState } from "react"
 
 interface Project {
   title: string
@@ -18,6 +19,9 @@ interface ProjectsSectionProps {
 }
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
+  const [showAll, setShowAll] = useState(false)
+  const displayedProjects = showAll ? projects : projects.slice(0, 4)
+
   return (
     <section id="projects" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,48 +37,68 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
             <span className="gradient-text-cyan-blue">Projects</span>
           </h2>
         </motion.div>
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-            >
-              <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-500/20 glow-card">
-                <CardHeader>
-                  <CardTitle className="text-xl text-cyan-400">{project.title}</CardTitle>
-                  <CardDescription className="text-gray-600 dark:text-gray-300">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <Badge key={tech} variant="outline" className="border-cyan-500/30 text-cyan-300 glow-badge">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex space-x-4">
-                    {project.link && project.link !== "#" && (
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={showAll ? "all" : "limited"}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="grid md:grid-cols-2 gap-8 overflow-hidden p-8"
+          >
+            {displayedProjects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+              >
+                <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-500/20 glow-card">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-cyan-400">{project.title}</CardTitle>
+                    <CardDescription className="text-gray-600 dark:text-gray-300">
+                      {project.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.map((tech) => (
+                        <Badge key={tech} variant="outline" className="border-cyan-500/30 text-cyan-300 glow-badge">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex space-x-4">
+                      {project.link && project.link !== "#" && (
+                        <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
+                          <ExternalLink className="w-4 h-4 mr-2" />
+                          Live Demo
+                        </Button>
+                      )}
                       <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Live Demo
+                        <Github className="w-4 h-4 mr-2" />
+                        Code
                       </Button>
-                    )}
-                    <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
-                      <Github className="w-4 h-4 mr-2" />
-                      Code
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+        {projects.length > 4 && (
+          <div className="flex justify-center mt-8 padding-4">
+            <Button
+              variant="outline"
+              className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent"
+              onClick={() => setShowAll((prev) => !prev)}
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   )
