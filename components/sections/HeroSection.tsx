@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 const roles = [
   'Software Engineer',
+  'Frontend Developer',
   'Backend Developer', 
   'Cloud Engineer',
   'Mobile Developer'
@@ -26,13 +27,13 @@ export function HeroSection() {
         <div className="text-center">
           <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
             <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">
-              Hi, I'm
+              Hi, I&apos;m
             </h1>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 gradient-text-cyan-blue">
-              John Developer
+              Hanif Naufal Ashari
             </h1>
             <div className="text-2xl md:text-3xl font-semibold mb-6 text-white flex justify-center items-baseline">
-              I'm a
+              I&apos;m a
               <span className="ml-2 relative inline-block">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -49,7 +50,7 @@ export function HeroSection() {
               </span>
             </div>
             <p className="text-md md:text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-              Passionate about building scalable backend systems, cloud infrastructure, and mobile applications. I turn complex problems into elegant solutions.
+              Passionate about building fullstack systems, cloud infrastructure, and mobile applications. I turn complex problems into elegant solutions.
             </p>
             <div className="flex flex-col items-center gap-6">
               <div className="flex items-center justify-center gap-4 mt-8">

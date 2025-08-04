@@ -14,10 +14,10 @@ export function ContactSection() {
           className="text-center"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text-cyan-blue">
-            Let's Connect
+            Let&apos;s Connect
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-            Ready to collaborate on your next project? Let's discuss how we can build something amazing together.
+            Ready to collaborate on your next project? Let&apos;s discuss how we can build something amazing together.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">

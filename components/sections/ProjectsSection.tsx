@@ -28,8 +28,9 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text-cyan-blue">
-            Featured Projects
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-white dark:text-white light:text-black">Featured </span>
+            <span className="gradient-text-cyan-blue">Projects</span>
           </h2>
         </motion.div>
         <div className="grid md:grid-cols-2 gap-8">

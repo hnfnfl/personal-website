@@ -1,5 +1,4 @@
 import { motion } from "framer-motion"
-import React from "react"
 
 export function AboutSection() {
   return (
@@ -12,15 +11,23 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text-cyan-blue">
-            About Me
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-white dark:text-white light:text-black">About </span>
+            <span className="gradient-text-cyan-blue">Me</span>
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
-              I'm a detail-oriented and innovative software engineer with a passion for building robust, scalable systems. My collaborative approach and diverse technical expertise allow me to tackle complex challenges across the full technology stack.
+              こんにちは! I&apos;m Hanif, a backend developer with a strong background in 
+              Go and native Android development using Kotlin. I enjoy building efficient, 
+              scalable systems and exploring new tools that make development faster and cleaner. 
+              Currently, I&apos;m working at Samsung Research Indonesia, where I help design and 
+              maintain backend systems for real-world business needs.
             </p>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              From architecting cloud-native backend services to developing intuitive mobile applications, I bring a comprehensive understanding of modern software development practices and a commitment to delivering exceptional results.
+              I&apos;m passionate about automation, system architecture, and finding elegant solutions 
+              to complex problems. Outside of work, I love learning languages (including Japanese!), 
+              exploring open-source projects, and tinkering with Linux servers using my home-lab server 
+              in my free time since I enjoy the challenge of managing my own infrastructure.
             </p>
           </div>
         </motion.div>

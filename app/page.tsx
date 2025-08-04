@@ -20,7 +20,7 @@ export default function Portfolio() {
   }, [isDark])
 
   const skills = {
-    backend: ["Node.js", "Golang", "MySQL", "PostgreSQL", "REST APIs", "Docker"],
+    fullstack: ["Node.js", "Golang", "MySQL", "PostgreSQL", "REST APIs", "Docker", "Next.js", "React", "Tailwind CSS"],
     cloud: ["AWS", "CI/CD", "Terraform", "Microservices", "DNS Management"],
     networking: ["Load Balancing", "VPN", "High Availability", "Virtualization"],
     mobile: ["Android Native", "Kotlin", "Java", "Room Database", "Retrofit", "Material Design"],

@@ -5,7 +5,7 @@ import React from "react"
 
 interface SkillsSectionProps {
   skills: {
-    backend: string[]
+    fullstack: string[]
     cloud: string[]
     networking: string[]
     mobile: string[]
@@ -62,16 +62,17 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text-cyan-blue">
-            Technical Skills
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-white dark:text-white light:text-black">Technical </span>
+            <span className="gradient-text-cyan-blue">Skills</span>
           </h2>
         </motion.div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           <SkillCard
             icon={<Code className="w-6 h-6 text-cyan-400" />}
-            title="Backend Development"
-            description="Building robust APIs and microservices with Node.js, Python, and Java"
-            skills={skills.backend}
+            title="Backend & Frontend Development"
+            description="Building scalable web applications with modern frameworks, APIs, and databases"
+            skills={skills.fullstack}
             delay={0 * 0.1}
           />
           <SkillCard

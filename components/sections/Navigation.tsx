@@ -25,7 +25,7 @@ export function Navigation({ activeSection, isDark, setIsDark, isMenuOpen, setIs
             whileHover={{ scale: 1.05 }}
             className="text-2xl font-bold gradient-text-cyan-blue"
           >
-            Portfolio
+            Hnfnfl
           </motion.div>
           <div className="hidden md:flex space-x-8">
             {["home", "about", "skills", "projects", "experience", "contact"].map((item) => (
