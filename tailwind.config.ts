@@ -49,7 +49,17 @@ const config: Config = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
+  			},
+			cyanBlueTheme: {
+				light: {
+					primary: 'rgb(38, 120, 190)',
+					secondary: 'rgb(50, 166, 166)',
+				},
+				dark: {
+					primary: 'rgb(13, 162, 231)',
+					secondary: 'rgb(0, 255, 255)',
+				},
+			},
   		},
   		borderRadius: {
   			lg: 'var(--radius)',

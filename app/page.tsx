@@ -33,7 +33,7 @@ export default function Portfolio() {
         "Scalable backend system handling 10k+ concurrent users with Docker containerization and AWS deployment.",
       tech: ["Node.js", "PostgreSQL", "Docker", "AWS", "Redis"],
       category: "backend",
-      link: "",
+      link: "https://example.com/e-commerce",
       github: "#",
     },
     {

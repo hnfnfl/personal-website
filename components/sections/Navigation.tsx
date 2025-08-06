@@ -17,7 +17,7 @@ export function Navigation({ activeSection, isDark, setIsDark, isMenuOpen, setIs
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 w-full z-50 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-b border-cyan-500/20"
+      className="fixed top-0 w-full z-50 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-b border-cyan-blue-primary-theme"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
@@ -32,7 +32,7 @@ export function Navigation({ activeSection, isDark, setIsDark, isMenuOpen, setIs
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
-                className={`capitalize transition-colors duration-200 ${activeSection === item ? "text-cyan-400" : "text-gray-600 dark:text-gray-300 hover:text-cyan-400"}`}
+                className={`capitalize transition-colors duration-200 ${activeSection === item ? "text-cyan-blue-primary-theme" : "text-theme hover:text-cyan-blue-primary-theme"}`}
               >
                 {item}
               </button>
@@ -66,7 +66,7 @@ export function Navigation({ activeSection, isDark, setIsDark, isMenuOpen, setIs
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
-                  className="block w-full text-left py-2 capitalize text-gray-600 dark:text-gray-300 hover:text-cyan-400"
+                  className="block w-full text-left py-2 capitalize text-theme hover:text-cyan-blue-primary-theme"
                 >
                   {item}
                 </button>

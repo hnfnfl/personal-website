@@ -33,7 +33,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-white dark:text-white light:text-black">Featured </span>
+            <span className="text-theme">Featured </span>
             <span className="gradient-text-cyan-blue">Projects</span>
           </h2>
         </motion.div>
@@ -55,29 +55,29 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-500/20 glow-card">
+                <Card className="h-full project-card-background glow-card">
                   <CardHeader>
-                    <CardTitle className="text-xl text-cyan-400">{project.title}</CardTitle>
-                    <CardDescription className="text-gray-600 dark:text-gray-300">
+                    <CardTitle className="text-xl text-cyanBlueTheme-light-primary dark:text-cyanBlueTheme-dark-primary">{project.title}</CardTitle>
+                    <CardDescription className="subtext-theme">
                       {project.description}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tech.map((tech) => (
-                        <Badge key={tech} variant="outline" className="border-cyan-500/30 text-cyan-300 glow-badge">
+                        <Badge key={tech} variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme glow-badge">
                           {tech}
                         </Badge>
                       ))}
                     </div>
                     <div className="flex space-x-4">
                       {project.link && project.link !== "#" && (
-                        <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
+                        <Button size="sm" variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme hover:bg-cyan-500/10 bg-transparent">
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Live Demo
                         </Button>
                       )}
-                      <Button size="sm" variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent">
+                      <Button size="sm" variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme hover:bg-cyan-500/10 bg-transparent">
                         <Github className="w-4 h-4 mr-2" />
                         Code
                       </Button>
@@ -92,7 +92,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
           <div className="flex justify-center mt-8 padding-4">
             <Button
               variant="outline"
-              className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 bg-transparent"
+              className="border-cyan-blue-primary-theme text-cyan-blue-primary-theme hover:bg-cyan-500/10 bg-transparent"
               onClick={() => setShowAll((prev) => !prev)}
             >
               {showAll ? "Show Less" : "Show More"}

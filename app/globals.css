@@ -3,20 +3,76 @@
 @tailwind utilities;
 
 @layer utilities {
+  .hover\:text-cyan-blue-primary-theme:hover {
+    color: rgb(var(--cyan-blue-primary));
+  }
+  .hover\:text-cyan-blue-secondary-theme:hover {
+    color: rgb(var(--cyan-blue-secondary));
+  }
+  .text-cyan-blue-primary-theme {
+    color: rgb(var(--cyan-blue-primary));
+  }
+  .text-cyan-blue-secondary-theme {
+    color: rgb(var(--cyan-blue-secondary));
+  }
+  .border-cyan-blue-primary-theme {
+    border-color: rgb(var(--cyan-blue-primary));
+  }
+  .border-cyan-blue-secondary-theme {
+    border-color: rgb(var(--cyan-blue-secondary));
+  }
+  .text-theme {
+    @apply text-slate-800 dark:text-gray-50;
+  }
+  .text-theme-inverse {
+    @apply text-slate-50 dark:text-gray-800;
+  }
+  .subtext-theme {
+    @apply text-slate-700 dark:text-gray-400;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
+
   .gradient-text-cyan-blue {
-    background-image: linear-gradient(135deg, rgb(13 162 231), rgb(0 255 255));
+    background-image: linear-gradient(
+      135deg,
+      rgb(var(--cyan-blue-primary)),
+      rgb(var(--cyan-blue-secondary))
+    );
     @apply bg-clip-text text-transparent;
+  }
+  .gradient-background-cyan-blue {
+    background-image: linear-gradient(
+      135deg,
+      rgb(var(--cyan-blue-primary)),
+      rgb(var(--cyan-blue-secondary))
+    );
+    @apply bg-clip-padding;
+  }
+  .gradient-background-cyan-blue:hover {
+    background-image: linear-gradient(
+      135deg,
+      rgb(var(--cyan-blue-primary-hover)),
+      rgb(var(--cyan-blue-secondary-hover))
+    );
+    @apply bg-clip-padding;
   }
   
   .glow-card {
-    @apply hover:border-cyan-500/60 transition-all duration-300;
-    box-shadow: 0 0 0 rgb(0 255 255 / 0);
+    @apply hover:border-slate-500/60 transition-all duration-300;
+    box-shadow: 0 0 0 rgb(00 116 139);
   }
-  
   .glow-card:hover {
+    box-shadow: 0 0 30px rgb(00 116 139 / 0.3);
+  }
+
+  .dark .glow-card {
+    @apply hover:border-cyan-500/60 transition-all duration-300;
+    box-shadow: 0 0 0 rgb(0 255 255);
+  }
+  .dark .glow-card:hover {
     box-shadow: 0 0 30px rgb(0 255 255 / 0.3);
   }
 
@@ -28,37 +84,52 @@
   .glow-badge:hover {
     box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
   }
-}
 
+  .skill-card-background {
+    @apply bg-gray-50 dark:bg-gray-900/90 backdrop-blur-sm border border-gray-700/50;
+  }
+
+  .project-card-background {
+    @apply bg-gray-200/50 dark:bg-gray-800/90 border border-gray-700/50;
+  }
+
+  .contact-card-background {
+    @apply bg-gray-600/50 dark:bg-gray-950 border border-gray-700/50;
+  }
+}
 
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
+    --background: 0 0% 98%; /* Off-white */
+    --foreground: 0 0% 20%; /* Soft dark gray */
+    --card: 0 0% 99%; /* Slightly different from background */
+    --card-foreground: 0 0% 18%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 0 0% 18%;
+    --primary: 200 100% 40%; /* Muted blue */
     --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
+    --secondary: 210 20% 94%; /* Soft blue-gray */
+    --secondary-foreground: 0 0% 20%;
+    --muted: 210 16% 92%;
     --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent: 180 60% 90%; /* Pastel cyan */
+    --accent-foreground: 0 0% 20%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
+    --border: 210 16% 85%;
+    --input: 210 16% 85%;
+    --ring: 200 100% 40%;
+    --chart-1: 200 100% 40%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --cyan-blue-primary: 38, 120, 190;
+    --cyan-blue-secondary: 50, 190, 190;
+    --cyan-blue-primary-hover: 28, 90, 150;
+    --cyan-blue-secondary-hover: 30, 140, 140;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -85,6 +156,10 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --cyan-blue-primary: 13, 162, 231;
+    --cyan-blue-secondary: 0, 255, 255;
+    --cyan-blue-primary-hover: 10, 120, 180;
+    --cyan-blue-secondary-hover: 0, 180, 180;
   }
 }
 

@@ -27,21 +27,21 @@ function SkillCard({ icon, title, description, skills, delay }: SkillCardProps) 
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay }}
       viewport={{ once: true }}
-      className="bg-gray-800/90 dark:bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 rounded-xl p-6 glow-card group"
+      className="skill-card-background rounded-xl p-6 glow-card group"
     >
       <div className="flex flex-col items-center text-center mb-6">
         <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4 glow-icon">
           {icon}
         </div>
-        <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors duration-300">{title}</h3>
-        <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">{description}</p>
+        <h3 className="text-theme text-xl font-semibold mb-2 group-hover:text-cyanBlueTheme-light-primary dark:group-hover:text-cyanBlueTheme-dark-primary transition-colors duration-300">{title}</h3>
+        <p className="subtext-theme text-sm leading-relaxed group-hover:text-gray-800 dark:group-hover:text-gray-300 transition-colors duration-300">{description}</p>
       </div>
       <div className="flex flex-wrap gap-2 justify-center">
         {skills.map((skill) => (
           <Badge
             key={skill}
             variant="secondary"
-            className="bg-blue-500/20 text-blue-300 border-blue-500/30 glow-badge"
+            className="bg-blue-300/80 dark:bg-blue-500/20 text-blue-500 dark:text-blue-300 border-blue-500/30 glow-badge"
           >
             {skill}
           </Badge>
@@ -53,7 +53,7 @@ function SkillCard({ icon, title, description, skills, delay }: SkillCardProps) 
 
 export function SkillsSection({ skills }: SkillsSectionProps) {
   return (
-    <section id="skills" className="py-20 bg-gray-100/50 dark:bg-gray-800/50">
+    <section id="skills" className="py-20 bg-slate-200/50 dark:bg-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -63,7 +63,7 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-white dark:text-white light:text-black">Technical </span>
+            <span className="text-theme">Technical </span>
             <span className="gradient-text-cyan-blue">Skills</span>
           </h2>
         </motion.div>

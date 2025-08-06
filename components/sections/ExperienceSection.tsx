@@ -38,16 +38,16 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-500/20">
+              <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-blue-primary-theme border-2">
                 <CardHeader>
                   <div className="flex flex-col md:flex-row md:justify-between md:items-center">
                     <div>
-                      <CardTitle className="text-xl text-cyan-400">{exp.title}</CardTitle>
+                      <CardTitle className="text-xl text-cyan-blue-secondary-theme">{exp.title}</CardTitle>
                       <CardDescription className="text-lg font-semibold text-gray-700 dark:text-gray-200">
                         {exp.company}
                       </CardDescription>
                     </div>
-                    <Badge variant="outline" className="border-cyan-500/30 text-cyan-300 mt-2 md:mt-0">
+                    <Badge variant="outline" className="border-cyan-600 dark:border-cyan-300 text-cyan-blue-secondary-theme mt-2 md:mt-0">
                       {exp.period}
                     </Badge>
                   </div>
@@ -55,22 +55,12 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 <CardContent>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">{exp.description}</p>
                   <div className="space-y-2">
-                    <h4 className="font-semibold text-cyan-400">Tech Stack Used:</h4>
-                    {exp.techStack.length > 4 ? (
-                      <ul
-                        className={`grid grid-cols-1 md:${exp.techStack.length > 6 ? "grid-cols-3" : "grid-cols-2"} gap-x-6 list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300`}
-                      >
+                    <h4 className="font-semibold text-cyan-blue-primary-theme">Tech Stack Used:</h4>
+                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
                         {exp.techStack.map((tech, i) => (
                           <li key={i}>{tech}</li>
                         ))}
                       </ul>
-                    ) : (
-                      <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
-                        {exp.techStack.map((tech, i) => (
-                          <li key={i}>{tech}</li>
-                        ))}
-                      </ul>
-                    )}
                   </div>
                 </CardContent>
               </Card>
