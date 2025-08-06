@@ -56,11 +56,20 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                   <p className="text-gray-600 dark:text-gray-300 mb-4">{exp.description}</p>
                   <div className="space-y-2">
                     <h4 className="font-semibold text-cyan-blue-primary-theme">Tech Stack Used:</h4>
-                    <ul className="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-300">
-                        {exp.techStack.map((tech, i) => (
-                          <li key={i}>{tech}</li>
-                        ))}
-                      </ul>
+                    <ul
+                      className="
+                        grid grid-cols-1
+                        sm:grid-cols-2
+                        md:grid-cols-3
+                        gap-x-4 gap-y-1
+                        list-disc list-inside
+                        text-gray-600 dark:text-gray-300
+                      "
+                    >
+                      {exp.techStack.map((tech: string, i: number) => (
+                        <li key={i}>{tech}</li>
+                      ))}
+                    </ul>
                   </div>
                 </CardContent>
               </Card>

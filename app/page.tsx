@@ -100,8 +100,19 @@ export default function Portfolio() {
       company: "Samsung Research Indonesia",
       period: "2022 - Present",
       description:
-        "Led backend development for cloud-native applications, mentored junior developers, and implemented DevOps practices.",
-      techStack: ["Golang", "PDNS", "AWS", "CI/CD", "Docker", "Docker Swarm", "Terraform", "HashiCorp Vault", "Jenkins"],
+        "Led backend development for DNS management applications, mentored junior developers, and implemented DevOps practices.",
+      techStack: [
+        "AWS",
+        "CI/CD",
+        "Docker",
+        "Docker Swarm",
+        "Golang",
+        "HashiCorp Vault",
+        "Jenkins",
+        "PDNS",
+        "Terraform",
+        "Apache Kafka",
+      ].sort(),
     },
     {
       title: "Android Developer",
@@ -109,14 +120,32 @@ export default function Portfolio() {
       period: "2021 - 2022",
       description:
         "Designed and maintained cloud infrastructure, automated deployment processes, and ensured system reliability.",
-      techStack: ["Kotlin", "Room", "Retrofit", "Material Design", "Firebase", "PHP", "CodeIgniter", "MySQL"],
+      techStack: [
+        "CodeIgniter",
+        "Firebase",
+        "Kotlin",
+        "Material Design",
+        "MySQL",
+        "PHP",
+        "Retrofit",
+        "Room",
+      ].sort(),
     },
     {
       title: "Web Application Developer",
       company: "Dinas Perindustrian dan Perdagangan Kabupaten Jombang (Disperindag Jombang)",
       period: "2020 - 2020",
       description: "Developed web applications with focus on performance optimization and user experience.",
-      techStack: ["PHP", "CodeIgniter", "MySQL", "HTML", "CSS", "JavaScript", "jQuery", "Bootstrap"],
+      techStack: [
+        "Bootstrap",
+        "CSS",
+        "CodeIgniter",
+        "HTML",
+        "JavaScript",
+        "MySQL",
+        "PHP",
+        "jQuery",
+      ].sort(),
     },
   ]
 
