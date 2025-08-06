@@ -72,15 +72,29 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     </div>
                     <div className="flex space-x-4">
                       {project.link && project.link !== "#" && (
-                        <Button size="sm" variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme hover:bg-cyan-500/10 bg-transparent">
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          Live Demo
-                        </Button>
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme hover:bg-cyan-500/10 bg-transparent">
+                            <ExternalLink className="w-4 h-4 mr-2" />
+                            Live Demo
+                          </Button>
+                        </a>
                       )}
-                      <Button size="sm" variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme hover:bg-cyan-500/10 bg-transparent">
-                        <Github className="w-4 h-4 mr-2" />
-                        Code
-                      </Button>
+                      {project.github && project.github !== "#" && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <Button size="sm" variant="outline" className="border-cyan-blue-secondary-theme text-cyan-blue-secondary-theme hover:bg-cyan-500/10 bg-transparent">
+                            <Github className="w-4 h-4 mr-2" />
+                            Code
+                          </Button>
+                        </a>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
