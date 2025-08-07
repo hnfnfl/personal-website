@@ -67,27 +67,31 @@ export function HeroSection() {
                   View My Work
                   <ChevronDown className="w-5 h-5 ml-2 text-theme-inverse" />
                 </Button>
-                <Button
-                  size="icon"
-                  variant="outline"
+                <a
+                  href="https://github.com/hnfnfl"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="border-2 border-cyan-blue-primary-theme text-cyan-300 bg-transparent rounded-[1rem] hover:bg-cyan-400/10 transition-all w-12 h-12 flex items-center justify-center"
+                  aria-label="GitHub"
                 >
                   <Github className="w-5 h-5 text-cyan-blue-primary-theme" />
-                </Button>
-                <Button
-                  size="icon"
-                  variant="outline"
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/hnfnfl/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="border-2 border-cyan-blue-primary-theme text-cyan-300 bg-transparent rounded-[1rem] hover:bg-cyan-400/10 transition-all w-12 h-12 flex items-center justify-center"
+                  aria-label="LinkedIn"
                 >
                   <Linkedin className="w-5 h-5 text-cyan-blue-primary-theme" />
-                </Button>
-                <Button
-                  size="icon"
-                  variant="outline"
+                </a>
+                <a
+                  href="mailto:hanifnfl.ashari@gmail.com"
                   className="border-2 border-cyan-blue-primary-theme text-cyan-300 bg-transparent rounded-[1rem] hover:bg-cyan-400/10 transition-all w-12 h-12 flex items-center justify-center"
+                  aria-label="Email"
                 >
                   <Mail className="w-5 h-5 text-cyan-blue-primary-theme" />
-                </Button>
+                </a>
               </div>
             </div>
           </motion.div>
