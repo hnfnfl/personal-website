@@ -1,0 +1,11 @@
+services:
+  nextjs:
+    image: personal-website:latest
+    ports:
+      - "3000:3000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nextjs.rule=Host(`your-domain.com`)"
+      - "traefik.http.services.nextjs.loadbalancer.server.port=3000"
+    environment:
+      - NODE_ENV=production
