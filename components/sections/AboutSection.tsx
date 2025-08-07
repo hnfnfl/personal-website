@@ -17,11 +17,9 @@ export function AboutSection() {
           </h2>
           <div className="max-w-4xl mx-auto">
             <p className="text-lg subtext-theme mb-6">
-              こんにちは! I&apos;m Hanif, a backend developer with a strong background in 
-              Go and native Android development using Kotlin for over 3 years of experience. 
-              I enjoy building efficient, scalable systems and exploring new tools that make 
-              development faster and cleaner. Currently, I&apos;m working at Samsung Research Indonesia, 
-              where I help design and maintain backend systems for real-world business needs.
+              こんにちは! I&apos;m Hanif, a backend developer with over 3 years of experience specializing in Go and native Android development with Kotlin.
+              I enjoy building efficient, scalable systems and exploring new tools that make development faster and cleaner.
+              Currently, I work as a Cloud Engineer at Samsung Research Indonesia, where I help design and maintain backend systems for cloud-native, real-world business needs.
             </p>
             <p className="text-lg subtext-theme">
               I&apos;m passionate about automation, system architecture, and finding elegant solutions 
