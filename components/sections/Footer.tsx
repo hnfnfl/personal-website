@@ -1,9 +1,13 @@
+import { profile } from "@/lib/data"
 
 export function Footer() {
   return (
-    <footer className="py-8 border-t border-cyan-blue-primary-theme">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p className="text-gray-600 dark:text-gray-300">© 2025 Hnfnfl. Built with Next.js and Tailwind CSS.</p>
+    <footer className="border-t py-8">
+      <div className="page-x flex flex-col gap-2 font-mono text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          © {new Date().getFullYear()} {profile.name}
+        </p>
+        <p>Next.js · Tailwind · self-hosted with Docker &amp; Traefik</p>
       </div>
     </footer>
   )

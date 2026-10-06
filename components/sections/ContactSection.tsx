@@ -1,115 +1,80 @@
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { Github, Linkedin, Mail } from "lucide-react"
+"use client"
+
+import { Reveal } from "@/components/Reveal"
+import { profile } from "@/lib/data"
+import { ArrowUpRight, Check, Copy } from "lucide-react"
+import { useState } from "react"
 
 export function ContactSection() {
+  const [copied, setCopied] = useState(false)
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      window.location.href = `mailto:${profile.email}`
+    }
+  }
+
   return (
-    <section id="contact" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="text-theme">Get In </span>
-              <span className="gradient-text-cyan-blue">Touch</span>
-            </h2>
-            <p className="text-xl text-slate-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Have a project in mind or want to discuss opportunities? I&apos;d love to hear from you.<br />
-              Let&apos;s build something amazing together.
-            </p>
+    <section id="contact" className="py-24 md:py-40">
+      <div className="page-x">
+        <Reveal>
+          <p className="eyebrow mb-8">
+            <span className="text-accent">05</span> / Contact
+          </p>
+          <h2 className="max-w-4xl text-balance text-[clamp(2.5rem,7vw,6rem)] font-medium leading-[0.95] tracking-[-0.04em]">
+            Have a project in mind? <span className="text-muted-foreground">Let&apos;s build it.</span>
+          </h2>
+        </Reveal>
+
+        <Reveal delay={0.08}>
+          <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <a
+              href={`mailto:${profile.email}`}
+              className="group inline-flex items-center gap-3 text-xl tracking-tight md:text-3xl"
+            >
+              <span className="link-underline">{profile.email}</span>
+              <ArrowUpRight className="h-6 w-6 text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground sm:ml-4"
+              aria-live="polite"
+            >
+              {copied ? <Check className="h-3.5 w-3.5 text-signal" /> : <Copy className="h-3.5 w-3.5" />}
+              {copied ? "Copied" : "Copy"}
+            </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left: Contact Form */}
-            <div className="contact-card-background rounded-xl p-8 shadow-lg flex flex-col justify-between">
-              <h3 className="text-lg font-semibold mb-6 text-theme">Send me a message</h3>
-              <form className="space-y-5">
-                <div className="flex space-x-4">
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    className="w-1/2 px-4 py-3 rounded-lg bg-[#23262F] text-theme focus:outline-none"
-                  />
-                  <input
-                    type="email"
-                    placeholder="your.email@example.com"
-                    className="w-1/2 px-4 py-3 rounded-lg bg-[#23262F] text-theme focus:outline-none"
-                  />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Project inquiry, collaboration, etc."
-                  className="w-full px-4 py-3 rounded-lg bg-[#23262F] text-theme focus:outline-none"
-                />
-                <textarea
-                  rows={5}
-                  placeholder="Tell me about your project or what you have in mind..."
-                  className="w-full px-4 py-3 rounded-lg bg-[#23262F] text-theme focus:outline-none resize-none"
-                />
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="w-full bg-gradient-to-r from-cyan-500 to-blue-400 hover:from-cyan-600 hover:to-blue-600 text-theme-inverse font-semibold flex items-center justify-center"
+        </Reveal>
+
+        <Reveal delay={0.12}>
+          <ul className="mt-16 grid grid-cols-1 border-t sm:grid-cols-3">
+            {[
+              { label: "GitHub", value: `@${profile.handle}`, href: profile.github },
+              { label: "LinkedIn", value: profile.handle, href: profile.linkedin },
+              { label: "Email", value: "Say hello", href: `mailto:${profile.email}` },
+            ].map((item) => (
+              <li key={item.label} className="border-b sm:border-b-0 sm:border-r sm:last:border-r-0">
+                <a
+                  href={item.href}
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="group flex items-center justify-between py-6 transition-colors hover:text-accent sm:px-6 sm:first:pl-0"
                 >
-                  <Mail className="w-5 h-5 mr-2 text-theme-inverse" />
-                  Send Message
-                </Button>
-              </form>
-            </div>
-            {/* Right: Contact Info, Socials, Stats */}
-            <div className="flex flex-col space-y-6">
-              {/* Let's connect */}
-              <div className="contact-card-background rounded-xl p-6 shadow">
-                <h3 className="text-lg font-semibold mb-4 text-theme">Let&apos;s connect</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-3">
-                    <Mail className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
-                    <span className="text-theme">hanifnfl.ashari@gmail.com</span>
-                  </div>
-                </div>
-              </div>
-              {/* Follow me */}
-              <div className="contact-card-background rounded-xl p-6 shadow">
-                <h3 className="text-lg font-semibold mb-4 text-theme">Follow me</h3>
-                <div className="space-y-3">
-                  <a href="https://github.com/hnfnfl" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-cyan-400 transition">
-                    <Github className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
-                    <span className="text-theme">@hnfnfl</span>
-                  </a>
-                  <a href="https://linkedin.com/in/hnfnfl" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-3 hover:text-cyan-400 transition">
-                    <Linkedin className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
-                    <span className="text-theme">hnfnfl</span>
-                  </a>
-                </div>
-              </div>
-              {/* Quick Stats */}
-              <div className="contact-card-background rounded-xl p-6 shadow mt-2">
-                <h3 className="text-lg font-semibold mb-4 text-theme">Quick Stats</h3>
-                <div className="grid grid-cols-2 gap-4 text-center">
-                  <div>
-                    <span className="text-2xl font-bold text-cyan-500 dark:text-cyan-400">5+</span>
-                    <div className="text-theme text-sm">Projects Completed</div>
-                  </div>
-                  <div>
-                    <span className="text-2xl font-bold text-cyan-500 dark:text-cyan-400">3+</span>
-                    <div className="text-theme text-sm">Years Experience</div>
-                  </div>
-                  <div>
-                    <span className="text-2xl font-bold text-cyan-500 dark:text-cyan-400">10+</span>
-                    <div className="text-theme text-sm">Technologies</div>
-                  </div>
-                  <div>
-                    <span className="text-2xl font-bold text-cyan-500 dark:text-cyan-400">99%</span>
-                    <div className="text-theme text-sm">Client Satisfaction</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+                  <span>
+                    <span className="eyebrow block">{item.label}</span>
+                    <span className="mt-1 block text-lg">{item.value}</span>
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </section>
   )

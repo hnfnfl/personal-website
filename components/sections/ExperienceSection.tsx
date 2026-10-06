@@ -1,14 +1,6 @@
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { motion } from "framer-motion"
-
-interface Experience {
-  title: string
-  company: string
-  period: string
-  description: string
-  techStack: string[]
-}
+import { Reveal } from "@/components/Reveal"
+import { SectionHeading } from "@/components/SectionHeading"
+import type { Experience } from "@/lib/data"
 
 interface ExperienceSectionProps {
   experiences: Experience[]
@@ -16,66 +8,39 @@ interface ExperienceSectionProps {
 
 export function ExperienceSection({ experiences }: ExperienceSectionProps) {
   return (
-    <section id="experience" className="py-20 bg-gray-100/50 dark:bg-gray-800/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text-cyan-blue">
-            Experience
-          </h2>
-        </motion.div>
-        <div className="space-y-8">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.title}
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border-cyan-blue-primary-theme border-2">
-                <CardHeader>
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-                    <div>
-                      <CardTitle className="text-xl text-cyan-blue-secondary-theme">{exp.title}</CardTitle>
-                      <CardDescription className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {exp.company}
-                      </CardDescription>
-                    </div>
-                    <Badge variant="outline" className="border-cyan-600 dark:border-cyan-300 text-cyan-blue-secondary-theme mt-2 md:mt-0">
-                      {exp.period}
-                    </Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">{exp.description}</p>
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-cyan-blue-primary-theme">Tech Stack Used:</h4>
-                    <ul
-                      className="
-                        grid grid-cols-1
-                        sm:grid-cols-2
-                        md:grid-cols-3
-                        gap-x-4 gap-y-1
-                        list-disc list-inside
-                        text-gray-600 dark:text-gray-300
-                      "
-                    >
-                      {exp.techStack.map((tech: string, i: number) => (
-                        <li key={i}>{tech}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
+    <section id="experience" className="bg-surface py-24 md:py-32">
+      <div className="page-x">
+        <Reveal>
+          <SectionHeading index="02" label="Experience" title="Where I've been shipping." />
+        </Reveal>
+
+        <ol>
+          {experiences.map((exp, i) => (
+            <Reveal key={exp.company} delay={i * 0.05}>
+              <li className="group flex flex-col gap-4 border-t py-10 md:flex-row md:gap-0">
+                <p className="font-mono text-sm text-muted-foreground md:w-1/4 md:pt-1.5">
+                  {i === 0 && <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle" />}
+                  {exp.period}
+                </p>
+                <div className="md:w-3/4">
+                  <h3 className="text-2xl font-medium tracking-tight md:text-3xl">
+                    {exp.title}
+                    <span className="text-muted-foreground"> at {exp.company}</span>
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted-foreground">{exp.description}</p>
+                  <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
+                    {exp.stack.map((tech, j) => (
+                      <span key={tech}>
+                        <span className="text-foreground/80">{tech}</span>
+                        {j < exp.stack.length - 1 && <span className="mx-2 text-accent">/</span>}
+                      </span>
+                    ))}
+                  </p>
+                </div>
+              </li>
+            </Reveal>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   )

@@ -1,80 +1,147 @@
 "use client"
-import { Button } from "@/components/ui/button"
+
+import { profile } from "@/lib/data"
 import { AnimatePresence, motion } from "framer-motion"
 import { Menu, Moon, Sun, X } from "lucide-react"
+import { useTheme } from "next-themes"
+import { useEffect, useState } from "react"
 
-interface NavigationProps {
-  activeSection: string
-  isDark: boolean
-  setIsDark: (val: boolean) => void
-  isMenuOpen: boolean
-  setIsMenuOpen: (val: boolean) => void
-  scrollToSection: (sectionId: string) => void
+const sections = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "work", label: "Work" },
+  { id: "toolkit", label: "Toolkit" },
+  { id: "contact", label: "Contact" },
+]
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  const isDark = mounted && resolvedTheme === "dark"
+  return (
+    <button
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      className="grid h-9 w-9 place-items-center rounded-full border text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+    >
+      {mounted ? isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" /> : <span className="h-4 w-4" />}
+    </button>
+  )
 }
 
-export function Navigation({ activeSection, isDark, setIsDark, isMenuOpen, setIsMenuOpen, scrollToSection }: NavigationProps) {
+export function Navigation() {
+  const [active, setActive] = useState<string>("")
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id)
+        })
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    )
+    ;["home", ...sections.map((s) => s.id)].forEach((id) => {
+      const el = document.getElementById(id)
+      if (el) observer.observe(el)
+    })
+
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      observer.disconnect()
+    }
+  }, [])
+
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 w-full z-50 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-b border-cyan-blue-primary-theme"
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-300 ${
+        open
+          ? "border-b bg-background"
+          : scrolled
+            ? "border-b bg-background/80 backdrop-blur-md"
+            : "border-b border-transparent"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text-cyan-blue"
-          >
-            Hnfnfl
-          </motion.div>
-          <div className="hidden md:flex space-x-8">
-            {["home", "about", "skills", "projects", "experience", "contact"].map((item) => (
-              <button
-                key={item}
-                onClick={() => scrollToSection(item)}
-                className={`capitalize transition-colors duration-200 ${activeSection === item ? "text-cyan-blue-primary-theme" : "text-theme hover:text-cyan-blue-primary-theme"}`}
-              >
-                {item}
-              </button>
+      <nav className="page-x flex h-16 items-center justify-between" aria-label="Main">
+        <a href="#home" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-gradient-accent text-[0.6rem] font-semibold tracking-tight text-accent-foreground">
+            {profile.katakana}
+          </span>
+          <span className="font-mono text-sm tracking-tight">
+            hanifnaufal
+            <span className="text-muted-foreground transition-colors group-hover:text-accent">.com</span>
+          </span>
+        </a>
+
+        <div className="flex items-center gap-2">
+          <ul className="mr-4 hidden items-center gap-7 md:flex">
+            {sections.map((s, i) => (
+              <li key={s.id}>
+                <a
+                  href={`#${s.id}`}
+                  className={`group flex items-baseline gap-1.5 text-sm transition-colors ${
+                    active === s.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <span
+                    className={`font-mono text-[0.65rem] transition-colors ${
+                      active === s.id ? "text-accent" : "text-muted-foreground/70"
+                    }`}
+                  >
+                    0{i + 1}
+                  </span>
+                  {s.label}
+                </a>
+              </li>
             ))}
-          </div>
-          <div className="flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsDark(!isDark)}
-              className="text-gray-600 dark:text-gray-300"
-            >
-              {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
-            <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
+          </ul>
+          <ThemeToggle />
+          <button
+            type="button"
+            className="grid h-9 w-9 place-items-center rounded-full border text-muted-foreground md:hidden"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+          >
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+          </button>
         </div>
-      </div>
+      </nav>
+
       <AnimatePresence>
-        {isMenuOpen && (
+        {open && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md"
+            className="overflow-hidden md:hidden"
           >
-            <div className="px-4 py-2 space-y-2">
-              {["home", "about", "skills", "projects", "experience", "contact"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item)}
-                  className="block w-full text-left py-2 capitalize text-theme hover:text-cyan-blue-primary-theme"
-                >
-                  {item}
-                </button>
+            <ul className="page-x flex flex-col pb-6">
+              {sections.map((s, i) => (
+                <li key={s.id} className="border-t first:border-t-0">
+                  <a
+                    href={`#${s.id}`}
+                    onClick={() => setOpen(false)}
+                    className="flex items-baseline gap-3 py-4 text-2xl tracking-tight"
+                  >
+                    <span className="font-mono text-xs text-accent">0{i + 1}</span>
+                    {s.label}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   )
 }

@@ -1,32 +1,56 @@
-import { motion } from "framer-motion"
+import { Reveal } from "@/components/Reveal"
+import { SectionHeading } from "@/components/SectionHeading"
+import { profile } from "@/lib/data"
+
+const interests = ["Automation", "System architecture", "Home lab", "Open source", "日本語"]
 
 export function AboutSection() {
   return (
-    <section id="about" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            <span className="text-theme dark:text-white light:text-black">About </span>
-            <span className="gradient-text-cyan-blue">Me</span>
-          </h2>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-lg subtext-theme mb-6">
-              こんにちは! I&apos;m Hanif, a backend developer with 3+ years of experience specializing in Go and native Android with Kotlin. I love building efficient, scalable systems and exploring tools that make development faster and cleaner. Currently, I work as a Cloud Engineer at Samsung Research Indonesia, where I help design and maintain backend systems for cloud-native, real-world business needs.
+    <section id="about" className="py-24 md:py-32">
+      <div className="page-x">
+        <Reveal>
+          <SectionHeading index="01" label="About" title="Simple, solid solutions to complex problems." />
+        </Reveal>
+
+        <div className="flex flex-col gap-12 md:flex-row md:gap-0">
+          <Reveal className="md:w-1/4 md:pr-8">
+            <p className="font-mono text-sm text-muted-foreground">
+              Building software
+              <br />
+              since <span className="text-foreground">{profile.startYear}</span>
             </p>
-            <p className="text-lg subtext-theme mb-6">
-              I'm passionate about automation, system architecture, and crafting simple yet powerful solutions to complex problems. Outside of work, I spend my time learning new languages (currently Japanese), diving into open-source projects, or tinkering with my home lab. Running my own infrastructure is something I enjoy—this website even runs on my personal server!
-            </p>
-            <p className="text-lg subtext-theme">
-              I believe in the power of community and collaboration, which is why I enjoy joining tech meetups and online forums. Sharing knowledge and learning from others is something I truly value. If you&apos;d like to connect or collaborate on a project, feel free to reach out!
-            </p>
+          </Reveal>
+
+          <div className="md:w-3/4">
+            <Reveal delay={0.05}>
+              <div className="max-w-2xl space-y-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
+                <p>
+                  <span className="text-foreground">こんにちは! I&apos;m Hanif</span>, a backend developer specializing in
+                  Go and native Android with Kotlin. I&apos;m currently a Cloud Engineer at Samsung Research Indonesia,
+                  where I help design and maintain backend systems for cloud-native, real-world business needs.
+                </p>
+                <p>
+                  I&apos;m passionate about automation, system architecture, and tools that make development faster and
+                  cleaner. Outside of work I&apos;m learning Japanese, diving into open source, and tinkering with my home
+                  lab. <span className="text-foreground">This website runs on my own server.</span>
+                </p>
+                <p>
+                  I enjoy tech meetups and online communities, because sharing knowledge is how we all get better. If
+                  you&apos;d like to connect or collaborate, my inbox is open.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <ul className="mt-10 flex flex-wrap gap-2">
+                {interests.map((item) => (
+                  <li key={item} className="rounded-full border px-3 py-1 font-mono text-xs text-muted-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
