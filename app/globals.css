@@ -100,6 +100,16 @@
   }
 }
 
+/* Theme switch: replace the default cross-fade with our own clip-path reveal */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+::view-transition-new(theme-scanline) {
+  animation: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

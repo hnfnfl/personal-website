@@ -7,7 +7,7 @@ export function HeroSection() {
       <div aria-hidden className="grid-paper pointer-events-none absolute inset-0" />
 
       <div className="page-x relative flex min-h-[min(calc(100svh-4rem),56rem)] flex-col justify-between gap-16 py-16 md:py-20">
-        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700">
+        <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms]">
           <p className="eyebrow flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-pulse_dot rounded-full bg-signal" />
@@ -19,20 +19,20 @@ export function HeroSection() {
 
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 delay-75">
+            <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms] delay-75">
               <h1 className="text-[clamp(2.75rem,8.5vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
                 <span className="text-gradient">Hanif</span> Naufal
                 <br />
                 Ashari.
               </h1>
             </div>
-            <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 delay-150">
+            <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms] delay-150">
               <p className="mt-8 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
                 <span className="text-foreground">{profile.role}</span> who loves building efficient, scalable
                 systems, from DNS infrastructure at Samsung Research to native Android apps.
               </p>
             </div>
-            <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 delay-200">
+            <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms] delay-200">
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <a
                   href="#work"
@@ -59,7 +59,7 @@ export function HeroSection() {
             </div>
           </div>
 
-          <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700 delay-300 lg:col-span-4">
+          <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms] delay-300 lg:col-span-4">
             <dl className="rounded-lg border bg-surface/70 p-5 font-mono text-sm backdrop-blur-sm">
               <div className="mb-4 flex items-center justify-between border-b pb-3 text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
                 <span>~/now</span>
