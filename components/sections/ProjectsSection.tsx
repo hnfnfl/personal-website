@@ -92,7 +92,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           </span>
         </div>
         <p className="mt-2 max-w-xl text-pretty leading-relaxed text-muted-foreground">{project.description}</p>
-        <p className="mt-3 font-mono text-xs text-muted-foreground">{project.stack.join(" · ")}</p>
+        {project.stack && <p className="mt-3 font-mono text-xs text-muted-foreground">{project.stack.join(" · ")}</p>}
       </div>
       <div className="col-start-2 mt-4 flex items-start gap-2 md:col-start-3 md:mt-1">
         {project.link && (

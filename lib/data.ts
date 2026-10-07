@@ -12,6 +12,7 @@ export const profile = {
 export const now = [
   { label: "Role", value: "Cloud Engineer" },
   { label: "At", value: "Samsung Research Indonesia" },
+  { label: "Founder", value: "PT Nuraya Digital Nusantara" },
   { label: "Focus", value: "Go · DNS · DevOps" },
   { label: "Learning", value: "日本語" },
 ]
@@ -22,9 +23,19 @@ export type Experience = {
   period: string
   description: string
   stack: string[]
+  link?: string
 }
 
 export const experiences: Experience[] = [
+  {
+    title: "Founder",
+    company: "PT Nuraya Digital Nusantara",
+    period: "2026 - Now",
+    description:
+      "Founded a software engineering studio in Malang that builds custom web applications, advises on IT and system architecture, and automates data workflows for businesses. It also runs Project Nuraya, its own line of web products for communities, small businesses and organizations, hosted on Indonesia-based infrastructure.",
+    stack: ["Custom web apps", "System architecture", "Data automation", "Proxmox"],
+    link: "https://projectnuraya.id",
+  },
   {
     title: "Cloud Engineer",
     company: "Samsung Research Indonesia",
@@ -56,13 +67,20 @@ export type ProjectCategory = "web" | "backend" | "mobile"
 export type Project = {
   title: string
   description: string
-  stack: string[]
+  stack?: string[]
   category: ProjectCategory
   link?: string
   github?: string
 }
 
 export const projects: Project[] = [
+  {
+    title: "Project Nuraya",
+    description:
+      "Digital product line of PT Nuraya Digital Nusantara: a bike rental system (Sewa Sepeda), Catat Servis, Tilawah Tracker for coordinating group tilawah, and a letter administration system for RT/RW neighborhood associations.",
+    category: "web",
+    link: "https://projectnuraya.id",
+  },
   {
     title: "Masterprima Attendance System",
     description: "Attendance system for Masterprima, using RFID for precise attendance tracking and reporting.",

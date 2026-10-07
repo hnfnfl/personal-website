@@ -27,7 +27,17 @@ export function AboutSection() {
                 <p>
                   <span className="text-foreground">こんにちは! I&apos;m Hanif</span>, a backend developer specializing in
                   Go and native Android with Kotlin. I&apos;m currently a Cloud Engineer at Samsung Research Indonesia,
-                  where I help design and maintain backend systems for cloud-native, real-world business needs.
+                  where I help design and maintain backend systems for cloud-native, real-world business needs. In
+                  January 2026 I also founded{" "}
+                  <a
+                    href="https://projectnuraya.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent"
+                  >
+                    PT Nuraya Digital Nusantara
+                  </a>
+                  , a software studio in Malang building practical digital solutions for businesses and communities.
                 </p>
                 <p>
                   I&apos;m passionate about automation, system architecture, and tools that make development faster and

@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 const description =
-  "Hanif Naufal Ashari is a backend & cloud engineer at Samsung Research Indonesia, building DNS infrastructure, Go services and native Android apps.";
+  "Hanif Naufal Ashari is a backend & cloud engineer at Samsung Research Indonesia and founder of PT Nuraya Digital Nusantara, building DNS infrastructure, Go services and native Android apps.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hanifnaufal.com"),
