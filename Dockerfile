@@ -1,36 +1,18 @@
-# Use Node.js as the base image
-FROM node:18-alpine AS builder
-
-# Set working directory
+FROM node:22-alpine AS builder
 WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Copy package.json and package-lock.json
 COPY package.json package-lock.json ./
+RUN npm ci
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of the application
 COPY . .
-
-# Build the Next.js app
 RUN npm run build
 
-# Use a lightweight web server for production
-FROM node:18-alpine AS runner
+# Static files only: no Node runtime in the final image.
+# The unprivileged variant runs as a non-root user, so it starts under cap_drop: ALL.
+FROM nginxinc/nginx-unprivileged:1.30-alpine AS runner
 
-# Set working directory
-WORKDIR /app
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/out /usr/share/nginx/html
 
-# Copy built files from the builder stage
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/package.json ./package.json
-
-# Install only production dependencies
-RUN npm install --production
-
-# Expose the port
 EXPOSE 3000
-
-# Start the Next.js app
-CMD ["npm", "start"]
