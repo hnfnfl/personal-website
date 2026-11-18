@@ -47,11 +47,15 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                     </span>
                   </h3>
                   <p className="mt-4 max-w-2xl text-pretty leading-relaxed text-muted-foreground">{exp.description}</p>
-                  <p className="mt-5 font-mono text-xs leading-relaxed text-muted-foreground">
+                  <p className="mt-5 flex flex-wrap gap-y-1 font-mono text-xs leading-relaxed text-muted-foreground">
                     {exp.stack.map((tech, j) => (
-                      <span key={tech}>
-                        <span className="whitespace-nowrap text-foreground/80">{tech}</span>
-                        {j < exp.stack.length - 1 && <span className="mx-2 text-accent">/</span>}
+                      <span key={tech} className="whitespace-nowrap">
+                        <span className="text-foreground/80">{tech}</span>
+                        {j < exp.stack.length - 1 && (
+                          <span aria-hidden className="mx-2 text-accent">
+                            /
+                          </span>
+                        )}
                       </span>
                     ))}
                   </p>

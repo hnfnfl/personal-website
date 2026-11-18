@@ -76,7 +76,7 @@ export function Navigation() {
                 >
                   <span
                     className={`font-mono text-[0.65rem] transition-colors ${
-                      active === s.id ? "text-accent" : "text-muted-foreground/70"
+                      active === s.id ? "text-accent" : "text-muted-foreground"
                     }`}
                   >
                     0{i + 1}

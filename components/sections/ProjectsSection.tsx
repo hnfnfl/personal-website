@@ -31,15 +31,15 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
 
         <div className="flex flex-col gap-8 md:flex-row md:gap-0">
           <div className="md:w-1/4 md:pr-8">
-            <div role="tablist" aria-label="Filter projects" className="flex flex-wrap gap-2 md:sticky md:top-24 md:flex-col md:items-start md:gap-1">
+            <div role="group" aria-label="Filter projects" className="flex flex-wrap gap-2 md:sticky md:top-24 md:flex-col md:items-start md:gap-1">
               {filters.map((f) => {
                 const count = f.id === "all" ? projects.length : projects.filter((p) => p.category === f.id).length
                 const selected = filter === f.id
                 return (
                   <button
                     key={f.id}
-                    role="tab"
-                    aria-selected={selected}
+                    type="button"
+                    aria-pressed={selected}
                     onClick={() => setFilter(f.id)}
                     className={`rounded-full border px-3 py-1 font-mono text-xs transition-colors md:rounded-none md:border-0 md:px-0 md:py-1 md:text-sm ${
                       selected
@@ -47,8 +47,13 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                         : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    <span className={`hidden md:inline ${selected ? "text-accent" : "text-transparent"}`}>→ </span>
-                    {f.label} <span className="opacity-60">({count})</span>
+                    <span aria-hidden className={`hidden md:inline ${selected ? "text-accent" : "text-transparent"}`}>
+                      →{" "}
+                    </span>
+                    {f.label}{" "}
+                    <span className={selected ? "opacity-70 md:text-muted-foreground md:opacity-100" : undefined}>
+                      ({count})
+                    </span>
                   </button>
                 )
               })}
@@ -118,7 +123,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
           </a>
         )}
         {!project.link && !project.github && (
-          <span className="px-1 py-1.5 font-mono text-xs text-muted-foreground/70">No public link</span>
+          <span className="py-1.5 font-mono text-xs text-muted-foreground">No public link</span>
         )}
       </div>
     </article>

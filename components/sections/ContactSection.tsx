@@ -58,12 +58,15 @@ export function ContactSection() {
               { label: "LinkedIn", value: profile.handle, href: profile.linkedin },
               { label: "Email", value: "Say hello", href: `mailto:${profile.email}` },
             ].map((item) => (
-              <li key={item.label} className="border-b sm:border-b-0 sm:border-r sm:last:border-r-0">
+              <li
+                key={item.label}
+                className="border-b sm:border-b-0 sm:border-r sm:px-6 sm:first:pl-0 sm:last:border-r-0 sm:last:pr-0"
+              >
                 <a
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center justify-between py-6 transition-colors hover:text-accent sm:px-6 sm:first:pl-0"
+                  className="group flex items-center justify-between py-6 transition-colors hover:text-accent"
                 >
                   <span>
                     <span className="eyebrow block">{item.label}</span>

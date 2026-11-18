@@ -20,7 +20,7 @@ export function HeroSection() {
         <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
             <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms] delay-75">
-              <h1 className="text-[clamp(2.75rem,8.5vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
+              <h1 className="text-[clamp(3rem,2rem+6vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.045em]">
                 <span className="text-gradient">Hanif</span> Naufal
                 <br />
                 Ashari.
