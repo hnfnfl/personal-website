@@ -19,14 +19,15 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 md:py-40">
-      <div className="page-x">
+    <section id="contact" className="blueprint relative overflow-hidden py-24 md:py-40">
+      <div aria-hidden className="hero-paper pointer-events-none absolute inset-0" />
+      <div className="page-x relative">
         <Reveal>
           <p className="eyebrow mb-8">
             <span className="text-accent">05</span> / Contact
           </p>
           <h2 className="max-w-4xl text-balance text-[clamp(2.5rem,7vw,6rem)] font-medium leading-[0.95] tracking-[-0.04em]">
-            Have a project in mind? <span className="text-muted-foreground">Let&apos;s build it.</span>
+            Have a project in mind? <span className="text-accent">Let&apos;s build it.</span>
           </h2>
         </Reveal>
 

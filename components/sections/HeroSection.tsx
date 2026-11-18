@@ -18,7 +18,7 @@ export function HeroSection() {
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
               href="#work"
-              className="group inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-medium text-accent-foreground transition-colors hover:bg-foreground hover:text-background"
             >
               See selected work
               <ArrowDownRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />

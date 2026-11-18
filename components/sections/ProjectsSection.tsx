@@ -50,6 +50,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     <span aria-hidden className={`hidden md:inline ${selected ? "text-accent" : "text-transparent"}`}>
                       →{" "}
                     </span>
+                    {f.id !== "all" && <span aria-hidden className={`cat-swatch cat-${f.id} mr-1.5 align-middle`} />}
                     {f.label}{" "}
                     <span className={selected ? "opacity-70 md:text-muted-foreground md:opacity-100" : undefined}>
                       ({count})
@@ -92,7 +93,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
       <div>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="text-xl font-medium tracking-tight md:text-2xl">{project.title}</h3>
-          <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground">
+            <span aria-hidden className={`cat-swatch cat-${project.category}`} />
             {project.category}
           </span>
         </div>

@@ -23,6 +23,7 @@ const config: Config = {
 					foreground: 'hsl(var(--accent-foreground))'
 				},
 				'accent-2': 'hsl(var(--accent-2))',
+				'accent-3': 'hsl(var(--accent-3))',
 				signal: 'hsl(var(--signal))',
 				border: 'hsl(var(--border))',
 				ring: 'hsl(var(--ring))',

@@ -7,28 +7,46 @@
     /* Cool neutrals with the original cyan-blue accent */
     --background: 210 29% 97%;
     --foreground: 222 30% 11%;
-    --surface: 214 26% 93%;
+    /* Banded sections sit on a faint blueprint-paper tint, not flat grey */
+    --surface: 211 42% 93.5%;
     --muted: 214 22% 90%;
     --muted-foreground: 215 14% 38%;
-    --accent: 208 67% 45%;
+    --accent: 208 68% 42%;
     --accent-foreground: 210 29% 98%;
     --accent-2: 180 58% 37%;
+    --accent-3: 256 42% 54%;
     --signal: 152 60% 34%;
     --border: 214 20% 85%;
-    --ring: 208 67% 45%;
+    --ring: 208 68% 42%;
+
+    /* Blueprint band (contact): the one region the accent owns outright */
+    --bp-background: 211 68% 30%;
+    --bp-foreground: 210 40% 97%;
+    --bp-muted: 208 52% 81%;
+    --bp-accent: 190 85% 73%;
+    --bp-accent-foreground: 211 68% 16%;
+    --bp-border: 211 46% 42%;
   }
   .dark {
     --background: 216 28% 7%;
     --foreground: 210 20% 92%;
-    --surface: 218 26% 10%;
+    --surface: 215 34% 10%;
     --muted: 218 20% 15%;
     --muted-foreground: 215 14% 62%;
     --accent: 199 89% 48%;
     --accent-foreground: 216 28% 7%;
     --accent-2: 180 100% 50%;
+    --accent-3: 255 80% 77%;
     --signal: 152 65% 50%;
     --border: 218 18% 18%;
     --ring: 199 89% 48%;
+
+    --bp-background: 212 60% 13%;
+    --bp-foreground: 210 30% 94%;
+    --bp-muted: 207 36% 72%;
+    --bp-accent: 190 90% 62%;
+    --bp-accent-foreground: 212 60% 9%;
+    --bp-border: 212 42% 23%;
   }
 
   * {
@@ -46,6 +64,11 @@
   ::selection {
     background: hsl(var(--accent));
     color: hsl(var(--accent-foreground));
+  }
+  html {
+    accent-color: hsl(var(--accent));
+    caret-color: hsl(var(--accent));
+    scrollbar-color: hsl(var(--muted-foreground) / 0.45) hsl(var(--background));
   }
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
@@ -133,6 +156,47 @@
     height: 14px;
     border-color: hsl(var(--accent));
   }
+
+  /* Contact: a blueprint sheet that bookends the hero. Remaps the semantic
+     tokens locally so every child utility (text-accent, border, ring…)
+     picks up the band palette without per-element overrides. */
+  .blueprint {
+    --background: var(--bp-background);
+    --foreground: var(--bp-foreground);
+    --muted-foreground: var(--bp-muted);
+    --accent: var(--bp-accent);
+    --accent-foreground: var(--bp-accent-foreground);
+    --ring: var(--bp-accent);
+    --border: var(--bp-border);
+    --signal: 152 62% 66%;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+  .blueprint .hero-paper {
+    mask-image: radial-gradient(ellipse 70% 90% at 85% 40%, black 15%, transparent 80%);
+  }
+
+}
+
+/* Project category swatches: same cool family, distinct lightness so the
+   three stay apart in both themes and for common colour-vision deficiencies.
+   Kept outside @layer: class names are built at runtime (cat-${category}),
+   so Tailwind's content scan would purge them from a layer. */
+.cat-swatch {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 1px;
+  flex: none;
+}
+.cat-web {
+  background: hsl(var(--accent));
+}
+.cat-backend {
+  background: hsl(var(--accent-2));
+}
+.cat-mobile {
+  background: hsl(var(--accent-3));
 }
 
 @layer utilities {
