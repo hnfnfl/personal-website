@@ -81,13 +81,57 @@
   .link-underline:focus-visible {
     background-size: 100% 1px;
   }
-  /* Faint engineering-paper grid used behind the hero */
-  .grid-paper {
+  /* Hero: engineering-drawing sheet. Minor 48px grid in border tone,
+     major lines every 4 cells in a faint accent. */
+  .hero-paper {
     background-image:
-      linear-gradient(to right, hsl(var(--border) / 0.55) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--border) / 0.55) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 70% 60% at 30% 40%, black 20%, transparent 75%);
+      linear-gradient(to right, hsl(var(--accent) / 0.13) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--accent) / 0.13) 1px, transparent 1px),
+      linear-gradient(to right, hsl(var(--border) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.6) 1px, transparent 1px);
+    background-size: 192px 192px, 192px 192px, 48px 48px, 48px 48px;
+    mask-image: radial-gradient(ellipse 85% 75% at 35% 45%, black 30%, transparent 85%);
+  }
+  .hero-name {
+    font-size: clamp(3.5rem, 1.5rem + 8vw, 8.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+  }
+  /* Title block: the ~/now sheet in the hero's lower right */
+  .hero-block {
+    border: 1px solid hsl(var(--foreground) / 0.22);
+    background: hsl(var(--background) / 0.86);
+    backdrop-filter: blur(6px);
+  }
+  .hero-block > * + *,
+  .hero-rows > * + * {
+    border-top: 1px solid hsl(var(--border));
+  }
+  .hero-row {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+  }
+  .hero-row > dt {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem 0.9rem;
+    border-right: 1px solid hsl(var(--border));
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: hsl(var(--muted-foreground));
+  }
+  .hero-row > dd {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+  }
+  /* Registration corner marks around the title block */
+  .hero-tick {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: hsl(var(--accent));
   }
 }
 
