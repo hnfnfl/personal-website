@@ -176,6 +176,192 @@
     mask-image: radial-gradient(ellipse 70% 90% at 85% 40%, black 15%, transparent 80%);
   }
 
+  /* Hero cursor: ordinate dimensions snapped to the sheet's 48px grid.
+     Everything moves on transform/clip-path so the snap stays on the
+     compositor; the expo ease-out makes each snap land, not slide. */
+  .hero-dim {
+    --gx: 0px;
+    --gy: 0px;
+    --snap: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    color: hsl(var(--accent));
+    opacity: 0;
+    transition: opacity 240ms ease-out;
+  }
+  .hero-dim[data-active="true"] {
+    opacity: 1;
+  }
+  .hero-dim-v,
+  .hero-dim-h {
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: transform var(--snap), clip-path var(--snap);
+  }
+  .hero-dim-v {
+    width: 1px;
+    height: 100%;
+    background: repeating-linear-gradient(to bottom, hsl(var(--accent) / 0.7) 0 4px, transparent 4px 8px);
+    transform: translateX(var(--gx));
+    clip-path: inset(var(--nav) 0 calc(100% - var(--gy)) 0);
+  }
+  .hero-dim-h {
+    width: 100%;
+    height: 1px;
+    background: repeating-linear-gradient(to right, hsl(var(--accent) / 0.7) 0 4px, transparent 4px 8px);
+    transform: translateY(var(--gy));
+    clip-path: inset(0 calc(100% - var(--gx)) 0 0);
+  }
+  .hero-dim-tag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1px 5px;
+    border-radius: 2px;
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.625rem;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    transition: transform var(--snap);
+  }
+  .hero-dim-tag-x {
+    transform: translate(calc(var(--gx) - 50%), calc(var(--nav) + 8px));
+  }
+  .hero-dim-tag-y {
+    transform: translate(8px, calc(var(--gy) - 50%));
+  }
+  .hero-dim-node {
+    position: absolute;
+    left: -11.5px;
+    top: -11.5px;
+    transform: translate(calc(var(--gx) + 0.5px), calc(var(--gy) + 0.5px));
+    transition: transform var(--snap);
+  }
+
+  /* Hero katakana: each kana rolls over to its romaji on hover or focus */
+  .kana {
+    display: inline-flex;
+    gap: 0.2em;
+    cursor: help;
+  }
+  .kana-cell {
+    display: inline-grid;
+    justify-items: center;
+    overflow: hidden;
+  }
+  .kana-cell > * {
+    grid-area: 1 / 1;
+    transition:
+      transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 280ms ease-out;
+    transition-delay: calc(var(--i) * 50ms);
+  }
+  .kana-cell > :last-child {
+    transform: translateY(105%);
+    opacity: 0;
+  }
+  .kana:hover .kana-cell > :first-child,
+  .kana:focus-visible .kana-cell > :first-child {
+    transform: translateY(-105%);
+    opacity: 0;
+  }
+  .kana:hover .kana-cell > :last-child,
+  .kana:focus-visible .kana-cell > :last-child {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Footer dig: real resolver output, laid out the way dig prints it */
+  .dig {
+    border: 1px solid hsl(var(--foreground) / 0.22);
+    border-radius: 3px;
+    background: hsl(var(--surface));
+  }
+  .dig-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  .dig-types {
+    display: flex;
+    border: 1px solid hsl(var(--border));
+    border-radius: 2px;
+  }
+  .dig-type {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    transition: color 150ms ease-out, background-color 150ms ease-out;
+  }
+  .dig-type + .dig-type {
+    border-left: 1px solid hsl(var(--border));
+  }
+  .dig-type:hover {
+    color: hsl(var(--foreground));
+  }
+  .dig-type[aria-pressed="true"] {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+  .dig-icon {
+    display: inline-flex;
+    padding: 0.35rem;
+    border-radius: 2px;
+    transition: color 150ms ease-out, background-color 150ms ease-out;
+  }
+  .dig-icon:hover:not(:disabled) {
+    color: hsl(var(--foreground));
+    background: hsl(var(--muted));
+  }
+  .dig-icon:disabled,
+  .dig-type:disabled {
+    cursor: progress;
+  }
+  .dig-out {
+    overflow-x: auto;
+    padding: 1rem;
+    font-size: 0.72rem;
+    line-height: 1.65;
+    font-variant-numeric: tabular-nums;
+    /* dig's "<<>>" and "->>" must print literally, not as arrow ligatures */
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
+    tab-size: 8;
+  }
+  .dig-line {
+    display: block;
+    min-height: 1lh;
+  }
+  .dig-line-in {
+    animation: dig-line 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: calc(var(--i, 0) * 22ms);
+  }
+  .dig-c {
+    color: hsl(var(--muted-foreground));
+  }
+  .dig-t {
+    color: hsl(var(--accent-2));
+  }
+  .dig-d {
+    color: hsl(var(--accent));
+  }
+  .dig-caret {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.1em;
+    margin-left: 0.3em;
+    vertical-align: -0.2em;
+    background: hsl(var(--accent));
+    animation: dig-blink 1s steps(1) infinite;
+  }
+
 }
 
 /* Project category swatches: same cool family, distinct lightness so the
@@ -197,6 +383,18 @@
 }
 .cat-mobile {
   background: hsl(var(--accent-3));
+}
+
+@keyframes dig-line {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+@keyframes dig-blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 @layer utilities {

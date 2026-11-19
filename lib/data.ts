@@ -2,6 +2,13 @@ export const profile = {
   name: "Hanif Naufal Ashari",
   handle: "hnfnfl",
   katakana: "ハニフ",
+  // Each kana with its romaji, for the hover reading in the hero
+  kana: [
+    ["ハ", "ha"],
+    ["ニ", "ni"],
+    ["フ", "fu"],
+  ] as const,
+  domain: "hanifnaufal.com",
   role: "Backend & Cloud Engineer",
   email: "hanifnfl.ashari@gmail.com",
   github: "https://github.com/hnfnfl",

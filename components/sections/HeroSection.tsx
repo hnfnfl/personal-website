@@ -1,10 +1,13 @@
 import { now, profile } from "@/lib/data"
+import { HeroGrid } from "@/components/HeroGrid"
 import { ArrowDownRight, ArrowUpRight } from "lucide-react"
+import type { CSSProperties } from "react"
 
 export function HeroSection() {
   return (
     <section id="home" className="relative overflow-hidden pt-16">
       <div aria-hidden className="hero-paper pointer-events-none absolute inset-0" />
+      <HeroGrid />
 
       <div className="page-x relative grid min-h-[min(calc(100svh-4rem),56rem)] items-end gap-12 py-14 md:py-20 lg:grid-cols-12 lg:gap-10">
         <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both [animation-duration:700ms] lg:col-span-7 lg:pb-2">
@@ -41,7 +44,17 @@ export function HeroSection() {
           <div className="hero-block rounded-[3px]">
             <div className="flex items-center justify-between px-4 py-2.5 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground">
               <span>~/now</span>
-              <span className="normal-case tracking-normal text-accent">{profile.katakana}</span>
+              <span className="kana normal-case tracking-normal text-accent" tabIndex={0}>
+                <span className="sr-only">
+                  {profile.katakana}, read {profile.kana.map(([, r]) => r).join("-")}
+                </span>
+                {profile.kana.map(([kana, romaji], i) => (
+                  <span key={kana} aria-hidden className="kana-cell" style={{ "--i": i } as CSSProperties}>
+                    <span lang="ja">{kana}</span>
+                    <span>{romaji}</span>
+                  </span>
+                ))}
+              </span>
             </div>
             <p className="text-pretty px-4 py-4 text-base leading-relaxed text-muted-foreground">
               <span className="text-foreground">{profile.role}</span> who loves building efficient, scalable
