@@ -16,6 +16,16 @@ export const profile = {
   startYear: 2020,
 }
 
+// Drives the local-time row and presence dot in the hero's ~/now block.
+// Hours are local to timeZone; workDays uses 0 = Sunday … 6 = Saturday.
+export const presence = {
+  timeZone: "Asia/Jakarta",
+  zoneLabel: "WIB",
+  workDays: [1, 2, 3, 4, 5],
+  workHours: [9, 18],
+  awakeHours: [7, 23],
+} as const
+
 export const now = [
   { label: "Role", value: "Cloud Engineer" },
   { label: "At", value: "Samsung Research Indonesia" },

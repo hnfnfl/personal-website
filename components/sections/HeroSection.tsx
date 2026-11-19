@@ -1,5 +1,6 @@
 import { now, profile } from "@/lib/data"
 import { HeroGrid } from "@/components/HeroGrid"
+import { LocalTimeValue, PresenceStatus } from "@/components/LocalTime"
 import { ArrowDownRight, ArrowUpRight } from "lucide-react"
 import type { CSSProperties } from "react"
 
@@ -67,15 +68,15 @@ export function HeroSection() {
                   <dd>{row.value}</dd>
                 </div>
               ))}
+              <div className="hero-row">
+                <dt>Local time</dt>
+                <dd>
+                  <LocalTimeValue />
+                </dd>
+              </div>
             </dl>
             <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 font-mono text-xs text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-pulse_dot rounded-full bg-signal" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-signal" />
-                </span>
-                Online · served from my home lab
-              </span>
+              <PresenceStatus />
               <span className="flex items-center gap-4">
                 <a href={profile.github} target="_blank" rel="noopener noreferrer" className="link-underline hover:text-foreground">
                   GitHub<ArrowUpRight className="ml-0.5 inline h-3 w-3" />
