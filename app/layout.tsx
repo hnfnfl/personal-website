@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { education, experiences, profile, skills, summary } from "@/lib/data";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -15,7 +16,7 @@ const geistMono = localFont({
 });
 
 const description =
-  "Hanif Naufal Ashari is a backend & cloud engineer at Samsung Research Indonesia and founder of PT Nuraya Digital Nusantara, building DNS infrastructure, Go services and native Android apps.";
+  "Hanif Naufal Ashari is a backend & cloud engineer at Samsung R&D Institute Indonesia and founder of PT Nuraya Digital Nusantara, building DNS infrastructure, Go services and native Android apps.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hanifnaufal.com"),
@@ -27,6 +28,10 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Hanif Naufal Ashari",
     type: "website",
+  },
+  alternates: {
+    canonical: "/",
+    types: { "text/markdown": "/llms.txt" },
   },
   twitter: {
     card: "summary",
@@ -42,6 +47,27 @@ export const viewport: Viewport = {
   ],
 };
 
+// schema.org Person: ties the name, roles and profiles together for search
+// engines and AI answer engines. Same facts as /llms.txt, no phone number.
+const current = experiences.filter((e) => /now/i.test(e.period))
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  alternateName: [profile.handle, profile.katakana],
+  url: profile.url,
+  email: `mailto:${profile.email}`,
+  jobTitle: profile.role,
+  description: summary,
+  address: { "@type": "PostalAddress", addressLocality: "Jakarta", addressCountry: "ID" },
+  worksFor: current.map((e) => ({ "@type": "Organization", name: e.company, ...(e.link ? { url: e.link } : {}) })),
+  hasOccupation: current.map((e) => ({ "@type": "Occupation", name: e.title })),
+  alumniOf: { "@type": "CollegeOrUniversity", name: education.school },
+  knowsAbout: Array.from(new Set(skills.flatMap((s) => s.items))),
+  knowsLanguage: ["id", "en"],
+  sameAs: [profile.github, profile.linkedin],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -50,6 +76,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd).replace(/</g, "\\u003c") }}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>

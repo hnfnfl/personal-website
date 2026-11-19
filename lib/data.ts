@@ -9,6 +9,8 @@ export const profile = {
     ["フ", "fu"],
   ] as const,
   domain: "hanifnaufal.com",
+  url: "https://hanifnaufal.com",
+  location: "Jakarta, Indonesia",
   role: "Backend & Cloud Engineer",
   email: "hanifnfl.ashari@gmail.com",
   github: "https://github.com/hnfnfl",
@@ -27,8 +29,8 @@ export const presence = {
 } as const
 
 export const now = [
-  { label: "Role", value: "Cloud Engineer" },
-  { label: "At", value: "Samsung Research Indonesia" },
+  { label: "Role", value: "Backend & Cloud Engineer" },
+  { label: "At", value: "Samsung R&D Institute Indonesia" },
   { label: "Founder", value: "PT Nuraya Digital Nusantara" },
   { label: "Focus", value: "Go · DNS · DevOps" },
   { label: "Learning", value: "日本語" },
@@ -41,6 +43,8 @@ export type Experience = {
   description: string
   stack: string[]
   link?: string
+  /** Longer record from the CV; published in /llms.txt, not on the page */
+  highlights?: string[]
 }
 
 export const experiences: Experience[] = [
@@ -54,12 +58,17 @@ export const experiences: Experience[] = [
     link: "https://projectnuraya.id",
   },
   {
-    title: "Cloud Engineer",
-    company: "Samsung Research Indonesia",
+    title: "Backend & Cloud Engineer",
+    company: "Samsung R&D Institute Indonesia",
     period: "2022 - Now",
     description:
       "Lead backend development for DNS management applications, mentor junior developers, and drive DevOps practices across the team.",
     stack: ["Golang", "AWS", "Terraform", "Docker Swarm", "Jenkins", "HashiCorp Vault", "Apache Kafka", "PowerDNS"],
+    highlights: [
+      "Global data replication (2022-2023): designed and built a multi-region synchronization engine bridging previously isolated regional DNS databases, keeping data consistent across Samsung Private Cloud's internal DNS Management System.",
+      "System stability and core features (2024-2025): owned stability after the global replication rollout, resolved critical bugs, and built internal features to keep services running.",
+      "Database migration to TiDB (2026): led the migration of core database infrastructure from MariaDB to TiDB (distributed SQL) for horizontal scalability, fault tolerance and stability.",
+    ],
   },
   {
     title: "Android Developer",
@@ -179,3 +188,15 @@ export const skills = [
     items: ["Next.js · React", "TypeScript", "Tailwind CSS", "Android · Kotlin", "Room · Retrofit"],
   },
 ]
+
+// Machine-readable profile (llms.txt, JSON-LD). Mirrors the ATS CV; no phone
+// number on purpose, since these files are crawled and indexed.
+export const summary =
+  "Backend & Cloud Engineer with 4+ years of experience building and maintaining distributed systems on Samsung's private cloud, including multi-region data replication and a MariaDB-to-TiDB (distributed SQL) migration. Also founder and CEO of PT Nuraya Digital Nusantara, a software company delivering custom software and scalable SaaS platforms. Strong in Go, Kafka, Linux servers and container-based infrastructure."
+
+export const education = {
+  school: "Universitas Brawijaya",
+  place: "Malang, Indonesia",
+  degree: "Bachelor's Degree in Information Systems",
+  period: "2017 - 2021",
+}

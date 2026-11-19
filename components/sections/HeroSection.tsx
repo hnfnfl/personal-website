@@ -59,7 +59,7 @@ export function HeroSection() {
             </div>
             <p className="text-pretty px-4 py-4 text-base leading-relaxed text-muted-foreground">
               <span className="text-foreground">{profile.role}</span> who loves building efficient, scalable
-              systems, from DNS infrastructure at Samsung Research to native Android apps.
+              systems, from DNS infrastructure at Samsung R&amp;D to native Android apps.
             </p>
             <dl className="hero-rows">
               {now.map((row) => (

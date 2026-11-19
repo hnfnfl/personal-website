@@ -1,128 +1,13 @@
 "use client"
 
+import { DigTranscript } from "@/components/DigTranscript"
+import { banner, lookup, type Result } from "@/lib/dig"
 import { cn } from "@/lib/utils"
 import { CornerDownLeft, RotateCw, X } from "lucide-react"
-import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react"
-
-const RESOLVER = "https://cloudflare-dns.com/dns-query"
-const SERVER = ";; SERVER: 1.1.1.1#443(cloudflare-dns.com) (HTTPS)"
-const TIMEOUT_MS = 5000
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 
 const TYPES = ["A", "NS"] as const
 type RecordType = (typeof TYPES)[number]
-
-const TYPE_NAMES: Record<number, string> = {
-  1: "A",
-  2: "NS",
-  5: "CNAME",
-  6: "SOA",
-  15: "MX",
-  16: "TXT",
-  28: "AAAA",
-  65: "HTTPS",
-  257: "CAA",
-}
-const RCODES: Record<number, string> = {
-  0: "NOERROR",
-  1: "FORMERR",
-  2: "SERVFAIL",
-  3: "NXDOMAIN",
-  4: "NOTIMP",
-  5: "REFUSED",
-}
-
-type RR = { name: string; type: number; TTL: number; data: string }
-type DohResponse = {
-  Status: number
-  TC: boolean
-  RD: boolean
-  RA: boolean
-  AD: boolean
-  CD: boolean
-  Answer?: RR[]
-  Authority?: RR[]
-}
-
-type Line =
-  | { kind: "comment"; text: string }
-  | { kind: "blank" }
-  | { kind: "record"; cols: [string, string, string, string]; data: string }
-
-type Result = { lines: Line[]; summary: string }
-
-const fqdn = (name: string) => (name.endsWith(".") ? name : `${name}.`)
-const typeName = (n: number) => TYPE_NAMES[n] ?? `TYPE${n}`
-
-// dig prints e.g. "Thu Nov 19 10:12:03 WIB 2026"
-function whenStamp(d: Date) {
-  const parts = Object.fromEntries(
-    new Intl.DateTimeFormat("en-US", {
-      weekday: "short",
-      month: "short",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-      timeZoneName: "short",
-      year: "numeric",
-    })
-      .formatToParts(d)
-      .map((p) => [p.type, p.value]),
-  )
-  return `${parts.weekday} ${parts.month} ${parts.day} ${parts.hour}:${parts.minute}:${parts.second} ${parts.timeZoneName} ${parts.year}`
-}
-
-function banner(domain: string, type: RecordType): { kind: "comment"; text: string } {
-  return { kind: "comment", text: `; <<>> DiG-in-the-browser <<>> ${domain} ${type} +https` }
-}
-
-function format(domain: string, type: RecordType, res: DohResponse, ms: number): Line[] {
-  const answer = res.Answer ?? []
-  const authority = res.Authority ?? []
-  const all = [...answer, ...authority]
-  const nameW = Math.max(fqdn(domain).length + 1, ...all.map((r) => fqdn(r.name).length)) + 2
-  const ttlW = Math.max(6, ...all.map((r) => String(r.TTL).length + 2))
-
-  const flags = ["qr", res.RD && "rd", res.RA && "ra", res.AD && "ad", res.CD && "cd", res.TC && "tc"]
-    .filter(Boolean)
-    .join(" ")
-  const id = Math.floor(Math.random() * 65536)
-  const record = (r: RR): Line => ({
-    kind: "record",
-    cols: [fqdn(r.name).padEnd(nameW), String(r.TTL).padEnd(ttlW), "IN  ", typeName(r.type).padEnd(7)],
-    data: r.data,
-  })
-
-  const lines: Line[] = [
-    banner(domain, type),
-    { kind: "comment", text: ";; Got answer:" },
-    {
-      kind: "comment",
-      text: `;; ->>HEADER<<- opcode: QUERY, status: ${RCODES[res.Status] ?? `RCODE${res.Status}`}, id: ${id}`,
-    },
-    {
-      kind: "comment",
-      text: `;; flags: ${flags}; QUERY: 1, ANSWER: ${answer.length}, AUTHORITY: ${authority.length}, ADDITIONAL: 0`,
-    },
-    { kind: "blank" },
-    { kind: "comment", text: ";; QUESTION SECTION:" },
-    { kind: "comment", text: `;${fqdn(domain)}`.padEnd(nameW) + "".padEnd(ttlW) + "IN  " + type },
-  ]
-  if (answer.length) {
-    lines.push({ kind: "blank" }, { kind: "comment", text: ";; ANSWER SECTION:" }, ...answer.map(record))
-  }
-  if (authority.length) {
-    lines.push({ kind: "blank" }, { kind: "comment", text: ";; AUTHORITY SECTION:" }, ...authority.map(record))
-  }
-  lines.push(
-    { kind: "blank" },
-    { kind: "comment", text: `;; Query time: ${ms} msec` },
-    { kind: "comment", text: SERVER },
-    { kind: "comment", text: `;; WHEN: ${whenStamp(new Date())}` },
-  )
-  return lines
-}
 
 /**
  * A real `dig` for the site's own domain, resolved in the visitor's browser
@@ -145,40 +30,10 @@ export function DigConsole({ domain, children }: { domain: string; children: Rea
     async (t: RecordType) => {
       const mine = ++seq.current
       setBusy(true)
-      const ctrl = new AbortController()
-      const timer = window.setTimeout(() => ctrl.abort(), TIMEOUT_MS)
-      const t0 = performance.now()
-      try {
-        const res = await fetch(`${RESOLVER}?name=${encodeURIComponent(domain)}&type=${t}`, {
-          headers: { accept: "application/dns-json" },
-          signal: ctrl.signal,
-          cache: "no-store",
-        })
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const json = (await res.json()) as DohResponse
-        const ms = Math.round(performance.now() - t0)
-        if (mine !== seq.current) return
-        const n = json.Answer?.length ?? 0
-        setResult({
-          lines: format(domain, t, json, ms),
-          summary: `${n} ${t} ${n === 1 ? "record" : "records"} for ${domain}, ${ms} milliseconds`,
-        })
-      } catch (err) {
-        if (mine !== seq.current) return
-        const timedOut = err instanceof DOMException && err.name === "AbortError"
-        const reason = timedOut ? "timed out" : err instanceof Error && err.message.startsWith("HTTP") ? err.message : "connection failed"
-        setResult({
-          lines: [
-            banner(domain, t),
-            { kind: "comment", text: `;; communications error to 1.1.1.1#443: ${reason}` },
-            { kind: "comment", text: ";; no servers could be reached" },
-          ],
-          summary: `Lookup failed: ${reason}. Run it again to retry.`,
-        })
-      } finally {
-        window.clearTimeout(timer)
-        if (mine === seq.current) setBusy(false)
-      }
+      const result = await lookup(domain, t)
+      if (mine !== seq.current) return
+      setResult(result)
+      setBusy(false)
     },
     [domain],
   )
@@ -286,33 +141,16 @@ export function DigConsole({ domain, children }: { domain: string; children: Rea
             </div>
           </div>
 
-          <pre className="dig-out" aria-busy={busy}>
-            {!result ? (
-              <>
-                <span className="dig-line dig-line-in dig-c">{banner(domain, type).text}</span>
-                <span className="dig-line dig-line-in dig-c">
-                  ;; querying 1.1.1.1#443<span className="dig-caret" />
-                </span>
-              </>
-            ) : (
-              result.lines.map((line, i) => (
-                <span key={i} className={cn("dig-line", cascade && "dig-line-in")} style={{ "--i": i } as CSSProperties}>
-                  {line.kind === "blank" ? (
-                    " "
-                  ) : line.kind === "comment" ? (
-                    <span className="dig-c">{line.text}</span>
-                  ) : (
-                    <>
-                      <span className="text-foreground">{line.cols[0]}</span>
-                      <span className="dig-c">{line.cols[1] + line.cols[2]}</span>
-                      <span className="dig-t">{line.cols[3]}</span>
-                      <span className="dig-d">{line.data}</span>
-                    </>
-                  )}
-                </span>
-              ))
-            )}
-          </pre>
+          {result ? (
+            <DigTranscript lines={result.lines} cascade={cascade} busy={busy} />
+          ) : (
+            <pre className="dig-out" aria-busy>
+              <span className="dig-line dig-line-in dig-c">{banner(domain, type).text}</span>
+              <span className="dig-line dig-line-in dig-c">
+                ;; querying 1.1.1.1#443<span className="dig-caret" />
+              </span>
+            </pre>
+          )}
           <p className="sr-only" aria-live="polite">
             {result?.summary ?? ""}
           </p>

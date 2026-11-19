@@ -26,7 +26,7 @@ export function AboutSection() {
               <div className="max-w-2xl space-y-6 text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
                 <p>
                   <span className="text-foreground">こんにちは! I&apos;m Hanif</span>, a backend developer specializing in
-                  Go and native Android with Kotlin. I&apos;m currently a Cloud Engineer at Samsung Research Indonesia,
+                  Go and native Android with Kotlin. I&apos;m currently a Backend &amp; Cloud Engineer at Samsung R&amp;D Institute Indonesia,
                   where I help design and maintain backend systems for cloud-native, real-world business needs. In
                   January 2026 I also founded{" "}
                   <a
